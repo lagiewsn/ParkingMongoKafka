@@ -72,6 +72,16 @@ public class ParkingResource {
     public ParkingStatus addParking(Parking parking) {
 
         return this.dbQuery.addParking(parking);
-        
+
+    }
+
+    @POST
+    @Path("add-multiple-parking")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ParkingStatus> addMultipleParking(List<Parking> parkings) {
+
+        return this.dbQuery.addMultipleParking(parkings);
+
     }
 }

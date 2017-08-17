@@ -82,7 +82,7 @@ public class DbQuery {
     public ParkingStatus addParking(Parking parking) {
 
         String status = "Existing";
-        Parking parkingToSave = null;
+        Parking parkingToSave;
         ParkingLevel parkingLevelToSave;
         ParkingSlots parkingSlotsToSave;
 
@@ -94,12 +94,12 @@ public class DbQuery {
             ListIterator<ParkingLevel> it = parking.getParkingLevels().listIterator();
             List<ParkingLevel> parkingLevelList = new ArrayList();
             while (it.hasNext()) {
-                
+
                 parkingLevelToSave = it.next();
                 ListIterator<ParkingSlots> iterator = parkingLevelToSave.getParkingSlots().listIterator();
                 List<ParkingSlots> parkingSlotsList = new ArrayList();
-                while(iterator.hasNext()) {
-                    
+                while (iterator.hasNext()) {
+
                     parkingSlotsToSave = iterator.next();
                     parkingSlotsList.add(parkingSlotsToSave);
                     this.datastore.save(parkingSlotsToSave);
@@ -114,6 +114,54 @@ public class DbQuery {
             status = "Added";
         }
 
-        return new ParkingStatus(parkingToSave, status);
+        return new ParkingStatus(parking.getParkingName(), status);
+    }
+
+    public List<ParkingStatus> addMultipleParking(List<Parking> parkings) {
+
+        ListIterator<Parking> parkingIterator = parkings.listIterator();
+        List<ParkingStatus> listParkingStatus = new ArrayList<>();
+
+        String status = "Existing";
+        Parking parkingToSave;
+        ParkingLevel parkingLevelToSave;
+        ParkingSlots parkingSlotsToSave;
+
+        while (parkingIterator.hasNext()) {
+
+            Parking parking = parkingIterator.next();
+            Query<Parking> queryCar = this.datastore.createQuery(Parking.class)
+                    .field("parkingName").contains(parking.getParkingName());
+
+            if (queryCar.asList().isEmpty()) {
+
+                ListIterator<ParkingLevel> levelIterator = parking.getParkingLevels().listIterator();
+                List<ParkingLevel> parkingLevelList = new ArrayList();
+                while (levelIterator.hasNext()) {
+
+                    parkingLevelToSave = levelIterator.next();
+                    ListIterator<ParkingSlots> slotIterator = parkingLevelToSave.getParkingSlots().listIterator();
+                    List<ParkingSlots> parkingSlotsList = new ArrayList();
+                    while (slotIterator.hasNext()) {
+
+                        parkingSlotsToSave = slotIterator.next();
+                        parkingSlotsList.add(parkingSlotsToSave);
+                        this.datastore.save(parkingSlotsToSave);
+                    }
+                    parkingLevelToSave = new ParkingLevel(parking.getParkingName(), parkingLevelToSave.getLevelName(), parkingSlotsList);
+                    parkingLevelList.add(parkingLevelToSave);
+                    this.datastore.save(parkingLevelToSave);
+                }
+                parkingToSave = new Parking(parking.getParkingName(), parkingLevelList);
+                this.datastore.save(parkingToSave);
+
+                status = "Added";
+            }
+            
+            listParkingStatus.add(new ParkingStatus(parking.getParkingName(), status));
+
+        }
+
+        return listParkingStatus;
     }
 }

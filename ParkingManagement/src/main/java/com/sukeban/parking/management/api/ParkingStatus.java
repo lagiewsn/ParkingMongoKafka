@@ -5,24 +5,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ParkingStatus {
     
     @JsonProperty
-    Parking parking;
+    String parkingName;
     @JsonProperty
     String status;
 
     public ParkingStatus() {
     }
 
-    public ParkingStatus(Parking parking, String status) {
-        this.parking = parking;
+    public ParkingStatus(String parkingName, String status) {
+        this.parkingName = parkingName;
         this.status = status;
     }
 
-    public Parking getParking() {
-        return parking;
+    public String getParking() {
+        return parkingName;
     }
 
-    public void setParking(Parking parking) {
-        this.parking = parking;
+    public void setParking(String parkingName) {
+        this.parkingName = parkingName;
     }
 
     public String getStatus() {

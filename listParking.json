@@ -1,0 +1,90 @@
+[
+  {
+    "parkingName": "parking1",
+    "parkingLevels": [
+      {
+        "levelName": "etage1",
+        "parkingSlots": [
+          {
+            "slotNumber": 1,
+            "slotStatusType": "AVAILABLE"
+          },
+          {
+            "slotNumber": 2,
+            "slotStatusType": "OCCUPED"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "parkingName": "parking2",
+    "parkingLevels": [
+      {
+        "levelName": "etage1",
+        "parkingSlots": [
+          {
+            "slotNumber": 1,
+            "slotStatusType": "AVAILABLE"
+          },
+          {
+            "slotNumber": 2,
+            "slotStatusType": "OCCUPED"
+          }
+        ]
+      },
+      {
+        "levelName": "etage2",
+        "parkingSlots": [
+          {
+            "slotNumber": 1,
+            "slotStatusType": "AVAILABLE"
+          },
+          {
+            "slotNumber": 2,
+            "slotStatusType": "OCCUPED"
+          },
+          {
+            "slotNumber": 3,
+            "slotStatusType": "OCCUPED"
+          },
+          {
+            "slotNumber": 4,
+            "slotStatusType": "OCCUPED"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "parkingName": "parking3",
+    "parkingLevels": [
+      {
+        "levelName": "etage1",
+        "parkingSlots": [
+          {
+            "slotNumber": 1,
+            "slotStatusType": "AVAILABLE"
+          },
+          {
+            "slotNumber": 2,
+            "slotStatusType": "OCCUPED"
+          }
+        ]
+      },
+      {
+        "levelName": "etage2",
+        "parkingSlots": [
+          {
+            "slotNumber": 1,
+            "slotStatusType": "AVAILABLE"
+          },
+          {
+            "slotNumber": 2,
+            "slotStatusType": "OCCUPED"
+          }
+        ]
+      }
+    ]
+  }
+]
